@@ -1,0 +1,110 @@
+@model MVCManukauTech.Models.DB.Products
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+        <!--Load Resources-->
+<style src="~/css/site.css"></style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+<script src="~/js/tinymce/tinymce.min.js"></script>
+<!--Initialize tinymce-->
+<script language="JavaScript" type="text/javascript" src="~/js/tinymceinit.js"></script>
+
+<h2>Edit Products</h2>
+
+@if (this.User.IsInRole("Administrator"))
+{
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Products</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ProductId" />
+        <div class="form-group">
+            <label asp-for="CategoryId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Name" class="form-control"></textarea>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageFileName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ImageFileName" class="form-control" />
+                <span asp-validation-for="ImageFileName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UnitCost" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UnitCost" class="form-control" />
+                <span asp-validation-for="UnitCost" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsDownload" />
+                    <label asp-for="IsDownload"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DownloadFileName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DownloadFileName" class="form-control" />
+                <span asp-validation-for="DownloadFileName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+}
+else
+{
+    <hr>
+    <div style="color:red;"><b>Sorry You do not have permissions to edit the product!!</b></div><br>
+    <div class="container">
+        <div><b>ProductID:</b> @Model.ProductId</div><br>
+        <div><b>CategoryId:</b> @Model.CategoryId</div><br>
+        <div><b>Name:</b> @Model.Name</div><br>
+        <div><b>ImageFileName:</b> @Model.ImageFileName</div><br>
+        <div><b>Description:</b> @Model.Description</div><br>
+        <div><b>IsDownload:</b> @Model.IsDownload</div><br>
+        <div><b>DownloadFileName:</b> @Model.DownloadFileName</div><br>
+    </div>
+     
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

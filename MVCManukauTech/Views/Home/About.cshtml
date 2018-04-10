@@ -1,0 +1,89 @@
+﻿@model MVCManukauTech.Models.DB.PageData
+
+@{
+    ViewData["Title"] = "About";
+}
+
+        <!--Load Resources-->
+<style src="~/css/site.css"></style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+<script src="~/js/tinymce/tinymce.min.js"></script>
+<!--Initialize tinymce-->
+<script language="JavaScript" type="text/javascript" src="~/js/tinymceinit.js"></script>
+
+
+<h2>About Page</h2>
+
+@if (this.User.IsInRole("Administrator"))
+{
+<form asp-action="EditAbout">
+    <div class="form-horizontal">
+        <h4>Edit About Page</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PageId" />
+        <div class="form-group">
+            <label asp-for="Pagename" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea id="Pagename" name="Pagename" class="form-control"></textarea>
+                <span asp-validation-for="Pagename" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input type="file" asp-for="Image" class="form-control">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PageText" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea id="PageText" name="PageText" class="form-control"></textarea>
+                <span asp-validation-for="PageText" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PageText2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="PageText2" class="form-control"></textarea>
+                <span asp-validation-for="PageText2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+    <div class="jumbotron">
+        <div style="color:red;"><b>This is how it will be shown to other users!</b></div><br>
+        <div class="container">
+            <div><img src="@Model.Image"></div><br>
+            <div>@Model.PageText</div><br>
+            <div>@Model.PageText2</div><br>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div><img src="@Model.Image"></div><br>
+        <div>@Model.PageText</div><br>
+        <div>@Model.PageText2</div><br>
+    </div>
+}
+<div>
+    <a asp-action="About">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<!--Match the columns used in this to match the database table-->

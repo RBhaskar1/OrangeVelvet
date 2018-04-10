@@ -1,0 +1,54 @@
+@model MVCManukauTech.Models.DB.AspNetUserRoles
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AspNetUserRoles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="RoleId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.SilverMembership)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SilverMembership)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GoldMembership)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GoldMembership)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NoMembership)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NoMembership)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>
